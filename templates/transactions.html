@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Transactions</h1>
+    <form method="post">
+        <label for="item_id">Item:</label>
+        <select name="item_id" id="item_id">
+            {% for item in items %}
+            <option value="{{ item.id }}">{{ item.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" required><br>
+        <label for="company_name">Company Name:</label>
+        <input type="text" name="company_name" id="company_name" required><br>
+        <button type="submit">Add Transaction</button>
+    </form>
+    <h2>All Transactions</h2>
+    <ul>
+        {% for transaction in transactions %}
+        <li>{{ transaction.date }}: {{ transaction.quantity }} of {{ transaction.item.name }} sold to {{ transaction.company_name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Inventory</a>
+</body>
+</html>
